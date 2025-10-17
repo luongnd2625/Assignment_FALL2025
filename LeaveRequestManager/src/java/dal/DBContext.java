@@ -11,12 +11,12 @@ public class DBContext {
     public Connection GetConnection() throws Exception {
         
         //Connection Settings
-        String serverName = "Ber"; //Instance Name
+        String serverName = "Ber"; //Server Name
         String dbName = "LeaveRequestManager"; //DB
         String portNumber = "1433"; //Portt
-        String instance = ""; // Nếu SQL Server có instance riêng thì ghi ở đây, VD: "Ber\\SQLEXPRESS"
-        String userID = "luongnd"; 
-        String password = "12345";
+        String instance = ""; //Idk but also add if needed
+        String userID = "luongnd"; //username ssms
+        String password = "12345"; //Pass ssms
 
         // Chuỗi kết nối
         String connectionURL = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";"
@@ -26,29 +26,29 @@ public class DBContext {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             return DriverManager.getConnection(connectionURL, userID, password);
         } catch (SQLException e) {
-            System.err.println("Lỗi kết nối SQL Server: " + e.getMessage());
+            System.err.println("Connect Error SQL Server: " + e.getMessage());
             throw e;
         }
     }
 
-    // Hàm main chỉ để test kết nối riêng
-    public static void main(String[] args) {
-        Connection conn = null;
-        try {
-            DBContext db = new DBContext();
-            conn = db.GetConnection();
-            if (conn != null) {
-                System.out.println("Kết nối thành công!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
+//    // Test connection
+//    public static void main(String[] args) {
+//        Connection conn = null;
+//        try {
+//            DBContext db = new DBContext();
+//            conn = db.GetConnection();
+//            if (conn != null) {
+//                System.out.println("Connected Successfully!");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (conn != null) conn.close();
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//    }
 }
 
